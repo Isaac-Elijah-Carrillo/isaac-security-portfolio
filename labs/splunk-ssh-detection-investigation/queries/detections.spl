@@ -1,0 +1,55 @@
+/*
+SSH Brute-Force Threshold Detection
+Detects 10 or more failed password attempts from one source IP
+within a five-minute interval.
+*/
+
+source="/var/log/auth.log" "Failed password"
+| rex "from (?<src_ip>\d+\.\d+\.\d+\.\d+)"
+| bin _time span=5m
+| stats count as failed_attempts by src_ip, _time
+| where failed_attempts >= 10
+| sort -failed_attempts
+
+
+/*
+Incident Investigation Summary
+Extracts source IP, targeted account, count, and attack timeframe.
+*/
+
+source="/var/log/auth.log" "Failed password"
+| rex "Failed password for (?:invalid user )?(?<target_user>\S+) from (?<src_ip>\d+\.\d+\.\d+\.\d+)"
+| stats count as failed_attempts earliest(_time) as first_seen latest(_time) as last_seen values(target_user) as targeted_users by src_ip
+| convert ctime(first_seen) ctime(last_seen)
+| sort -failed_attempts
+
+
+/*
+Compromise Assessment
+Checks whether a successful login followed the failed attempts.
+*/
+
+source="/var/log/auth.log" ("Failed password" OR "Accepted password")
+| rex "from (?<src_ip>\d+\.\d+\.\d+\.\d+)"
+| rex "(?<auth_result>Failed|Accepted) password for (?:invalid user )?(?<target_user>\S+)"
+| search src_ip="192.168.1.155"
+| stats
+    count(eval(auth_result="Failed")) as failed_attempts
+    count(eval(auth_result="Accepted")) as successful_logins
+    values(target_user) as targeted_users
+    by src_ip
+| eval investigation_status=if(
+    successful_logins=0,
+    "No successful authentication observed",
+    "Potential compromise - investigate"
+  )
+
+
+/*
+Failed SSH Attempts Timeline
+*/
+
+source="/var/log/auth.log" "Failed password"
+| rex "from (?<src_ip>\d+\.\d+\.\d+\.\d+)"
+| search src_ip="192.168.1.155"
+| timechart span=1m count as failed_attempts
