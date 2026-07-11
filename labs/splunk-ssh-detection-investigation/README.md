@@ -1,5 +1,9 @@
 # Splunk SSH Brute-Force Detection and Incident Investigation
 
+ **Project Type:** Detection Engineering • Incident Response • SIEM • Linux Security
+
+This project demonstrates the end-to-end detection and investigation of a simulated SSH brute-force attack against an Ubuntu server. Linux authentication logs were centralized in Splunk using the Splunk Universal Forwarder, custom SPL detections were developed, the attack was investigated through a SOC-style workflow, and automated containment was verified using Fail2Ban and nftables.
+
 ## Overview
 
 This project extends a Linux SSH brute-force lab into a centralized SIEM detection and incident-investigation workflow.
