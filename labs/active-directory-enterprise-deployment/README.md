@@ -1,10 +1,18 @@
-# Enterprise Active Directory Deployment & Domain Integration Lab
+# Enterprise Active Directory Deployment Lab
+
+## Project Status
+
+✅ **Completed**
+
+This lab establishes the foundational Active Directory environment that will be expanded in future labs including Organizational Units (OUs), Group Policy Objects (GPOs), Windows Event Logging, Sysmon deployment, Splunk integration, and Active Directory security monitoring.
+
+---
 
 ## Overview
 
-In this lab, I built an enterprise-style Active Directory environment using Oracle VirtualBox. The lab simulates a basic corporate network by deploying a Windows Server 2022 Domain Controller, configuring Active Directory Domain Services (AD DS) and DNS, and joining a Windows 11 workstation to the domain.
+In this lab, I built an enterprise-style Active Directory environment using Oracle VirtualBox. The lab simulates a corporate network by deploying a Windows Server 2022 Domain Controller, configuring Active Directory Domain Services (AD DS) and DNS, and joining a Windows 11 workstation to the domain.
 
-This project demonstrates core Windows Server administration, identity and access management, enterprise networking, and Active Directory fundamentals commonly used in Help Desk, Systems Administration, and SOC environments.
+This project demonstrates core Windows Server administration, identity and access management, enterprise networking, and Active Directory fundamentals commonly used in Help Desk, Systems Administration, and Security Operations Center (SOC) environments.
 
 ---
 
@@ -15,7 +23,7 @@ This project demonstrates core Windows Server administration, identity and acces
 - Configure Active Directory Integrated DNS
 - Create a new Active Directory forest (`corp.local`)
 - Configure an isolated VirtualBox network
-- Deploy a Windows 11 Enterprise workstation
+- Deploy a Windows 11 Pro workstation
 - Configure static IP addressing
 - Join a Windows workstation to the Active Directory domain
 - Verify domain authentication and DNS functionality
@@ -39,25 +47,29 @@ This project demonstrates core Windows Server administration, identity and acces
 ## Network Topology
 
 ```text
-                    AD_LAB
-              192.168.100.0/24
-    -------------------------------------
+                    AD_LAB (192.168.100.0/24)
 
-           DC01
-    Windows Server 2022
-    Active Directory
-    DNS Server
-
-      IP: 192.168.100.10
-             │
-             │
-      Kerberos / DNS
-             │
-             │
-      CLIENT01
-     Windows 11 Pro
-
-      IP: 192.168.100.20
+        ┌──────────────────────────────────────────┐
+        │                                          │
+        │  DC01                                    │
+        │  Windows Server 2022                     │
+        │  Active Directory Domain Services        │
+        │  DNS Server                              │
+        │  IP Address: 192.168.100.10              │
+        │                                          │
+        └──────────────────────────────────────────┘
+                         │
+              Kerberos Authentication
+                  DNS Resolution
+                         │
+        ┌──────────────────────────────────────────┐
+        │                                          │
+        │  CLIENT01                               │
+        │  Windows 11 Pro                         │
+        │  Domain Joined                          │
+        │  IP Address: 192.168.100.20             │
+        │                                          │
+        └──────────────────────────────────────────┘
 ```
 
 ---
@@ -67,8 +79,8 @@ This project demonstrates core Windows Server administration, identity and acces
 - Windows Server 2022
 - Windows 11 Pro
 - Oracle VirtualBox
-- Active Directory Domain Services
-- Active Directory Users and Computers
+- Active Directory Domain Services (AD DS)
+- Active Directory Users and Computers (ADUC)
 - DNS
 - TCP/IP
 - Kerberos
@@ -105,11 +117,11 @@ This project demonstrates core Windows Server administration, identity and acces
 
 - Assigned a static IP address to DC01
 - Installed Active Directory Domain Services
-- Installed DNS Server
+- Installed the DNS Server role
 - Promoted the server to a Domain Controller
 - Created a new Active Directory forest:
 
-```
+```text
 corp.local
 ```
 
@@ -120,8 +132,8 @@ corp.local
 - Installed Windows 11 Pro
 - Configured static IPv4 addressing
 - Configured DNS to use the Domain Controller
-- Verified connectivity with ICMP
-- Verified DNS name resolution
+- Verified network connectivity using ICMP
+- Verified Active Directory DNS name resolution
 
 ---
 
@@ -129,8 +141,8 @@ corp.local
 
 - Joined CLIENT01 to the `corp.local` domain
 - Authenticated using the domain administrator account
-- Verified domain authentication
-- Verified the computer object was created within Active Directory
+- Verified successful domain authentication
+- Confirmed the computer object was created in Active Directory
 
 ---
 
@@ -180,7 +192,7 @@ corp\Administrator
 
 Verified the workstation appears inside Active Directory Users and Computers.
 
-```
+```text
 corp.local
     └── Computers
             └── CLIENT01
@@ -194,7 +206,7 @@ corp.local
 
 *Both virtual machines running after successful domain integration.*
 
-![Windows AD Lab 1 Screenshot #1](screenshots/Windows%20AD%20Lab%201%20Screenshot%20%231.png)
+![Windows AD Lab 1 Screenshot #1](screenshots/Windows%20AD%20Lab%201%20Screenshot%20%231.1.png)
 
 ---
 
@@ -232,9 +244,9 @@ corp.local
 
 ## Key Takeaways
 
-This lab provided hands-on experience deploying and administering a basic enterprise Active Directory environment. Beyond installing Windows Server, the project required configuring identity services, DNS, virtual networking, workstation deployment, and validating successful domain authentication between systems.
+This lab provided hands-on experience deploying and administering an enterprise-style Active Directory environment from the ground up. Beyond installing Windows Server, the project required configuring identity services, DNS, virtual networking, workstation deployment, and validating successful domain authentication.
 
-The completed environment serves as the foundation for future enterprise labs involving Group Policy, Organizational Units, Windows Event Logging, Sysmon, Splunk integration, and Active Directory security monitoring.
+The completed environment serves as the foundation for future labs involving Group Policy, Organizational Units, Windows Event Logging, Sysmon deployment, Splunk integration, and Active Directory security monitoring.
 
 ---
 
