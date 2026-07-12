@@ -146,6 +146,12 @@ corp.local
 
 ---
 
+## Video Walkthrough
+
+A complete walkthrough of this lab, including the Active Directory deployment, domain controller configuration, DNS validation, and domain join process, is available below.
+
+🎥 https://youtu.be/KxW3dzlyxxc
+
 ## Validation
 
 ### Network Connectivity
