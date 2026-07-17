@@ -23,6 +23,18 @@ These tasks simulate foundational Identity & Access Management responsibilities 
 
 ---
 
+## Technologies Used
+
+- Windows Server 2022
+- Active Directory Domain Services (AD DS)
+- Active Directory Users and Computers (ADUC)
+- Windows 11 Enterprise
+- PowerShell
+- NTFS Permissions
+- Role-Based Access Control (RBAC)
+
+---
+
 ## Lab Environment
 
 | Component | Technology |
@@ -143,3 +155,68 @@ Planned enhancements include:
 - Conditional Access
 - Single Sign-On (SSO)
 
+---
+
+# Screenshots
+
+## Active Directory Domain Structure
+
+The domain preserves the default Active Directory containers while introducing custom Organizational Units to organize enterprise resources and support scalable administration.
+
+![Domain Structure](screenshots/01-domain-ou-structure.png)
+
+---
+
+## Department Organizational Units
+
+Department-based Organizational Units separate IT, Human Resources, and Finance users, providing the foundation for delegated administration and future Group Policy deployment.
+
+![Department Organizational Units](screenshots/02-department-organizational-units.png)
+
+---
+
+## Enterprise User Identities
+
+Enterprise user accounts were created with standardized naming conventions and business attributes to simulate a production Active Directory environment.
+
+![Enterprise User Identities](screenshots/03-enterprise-user-identities.png)
+
+---
+
+## Global Security Groups
+
+Role-Based Access Control (RBAC) was implemented through Global Security Groups representing each department.
+
+![Global Security Groups](screenshots/04-global-security-groups.png)
+
+---
+
+## RBAC Group Membership
+
+Users were assigned to department-specific security groups to simplify permission management and demonstrate least-privilege administration.
+
+![RBAC Group Membership](screenshots/05-rbac-group-membership.png)
+
+---
+
+## Enterprise User Properties
+
+Business attributes—including job title, department, company, office location, and organizational information—were populated to simulate a realistic enterprise identity directory.
+
+![Enterprise User Properties](screenshots/06-enterprise-user-properties.png)
+
+---
+
+## Manager Relationships
+
+Manager assignments establish organizational hierarchy within Active Directory and support enterprise features such as address books, workflows, and reporting structures.
+
+![Manager Relationship](screenshots/07-manager-relationship.png)
+
+---
+
+## Domain Authentication Validation
+
+A successful domain logon was verified from a domain-joined workstation using standard Windows commands to confirm Active Directory authentication.
+
+![Domain Authentication Validation](screenshots/08-domain-authentication-validation.png)
