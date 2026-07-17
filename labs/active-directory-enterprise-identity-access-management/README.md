@@ -10,6 +10,13 @@ These tasks simulate foundational Identity & Access Management responsibilities 
 
 ---
 
+## Project Resources
+
+- 📄 **GitHub Repository:** *(current repository)*
+- 🎥 **Video Walkthrough:** https://youtu.be/ta4YGWM2m0s
+
+---
+
 ## Objectives
 
 - Design a scalable Organizational Unit (OU) structure
